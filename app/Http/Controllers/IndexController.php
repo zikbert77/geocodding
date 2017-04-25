@@ -37,7 +37,8 @@ class IndexController extends Controller
 
         }
 
-        $positions = Position::get()->where('status', 1);
+        $positions = Position::where('status', 1)->get();
+        dump($positions);
         $data = [
             'title' => 'Google maps API web-site',
             'positions' => $positions
@@ -72,12 +73,18 @@ class IndexController extends Controller
             $position['lng'] = $_GET['p_lng'];
 
             $sql = "INSERT INTO `positions` (position_name, position_lat, position_lng, description) VALUES (?,?,?,?)";
-            DB::insert($sql, [
-                $position['name'],
-                $position['lat'],
-                $position['lng'],
-                $position['descr']
-            ]);
+
+            $p_id = Position::insertGetId([
+                    'position_name' => $position['name'],
+                    'position_lat' => $position['lat'],
+                    'position_lng' => $position['lng'],
+                    'description' => $position['descr']
+                ]);
+
+            $likes = new Like;
+            $likes->p_id = $p_id;
+            $likes->likes = 0;
+            $likes->save();
 
         return json_encode($position);
     }

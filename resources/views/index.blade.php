@@ -75,12 +75,11 @@
                     <div class="place-position"><b>lat:</b>{{ $pos->position_lat }} <b>lng:</b>{{ $pos->position_lng }}</div>
                     <div class="place-description">{{ $pos->description }}</div>
                     <div class="likes">
-
-                            <form action="{{ route('home') }}", method="post">
-                                {{ csrf_field() }}
-                                <input type="hidden" name="position_id" value="{{ $pos->id }}">
-                                <input type="submit" value="Like"> | {{ App\Position::find($pos->id)->like->likes }}
-                            </form>
+                        <form action="{{ route('home') }}", method="post">
+                            {{ csrf_field() }}
+                            <input type="hidden" name="position_id" value="{{ $pos->id }}">
+                            <input type="submit" value="Like"> | {{ App\Position::find($pos->id)->like->likes }}
+                        </form>
 
                     </div>
                     <hr>
