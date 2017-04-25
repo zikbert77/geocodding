@@ -72,8 +72,6 @@ class IndexController extends Controller
             $position['lat'] = $_GET['p_lat'];
             $position['lng'] = $_GET['p_lng'];
 
-            $sql = "INSERT INTO `positions` (position_name, position_lat, position_lng, description) VALUES (?,?,?,?)";
-
             $p_id = Position::insertGetId([
                     'position_name' => $position['name'],
                     'position_lat' => $position['lat'],

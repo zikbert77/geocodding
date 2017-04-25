@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Ip;
+use App\Like;
 use Illuminate\Http\Request;
 use App\Position;
 
@@ -34,7 +36,16 @@ class AdminController extends Controller
 
     public function delete($id){
 
+        $ips = Ip::where('position_id', $id)->first();
+
+        $like = Like::where('p_id', $id)->first();
+
         $pos = Position::find($id);
+        if($like != null)
+            $like->delete();
+
+        if($ips != null)
+            $ips->delete();
         $pos->delete();
 
         return redirect()->route('admin');
