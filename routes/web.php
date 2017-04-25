@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', 'IndexController@index')->name('home');
+Route::match(['get', 'post'], '/', 'IndexController@index')->name('home');
 Route::get('/getPosition', 'IndexController@getPosition');
 Route::get('/setPosition', 'IndexController@setPosition');
 Route::get('/admin', 'AdminController@index')->name('admin');

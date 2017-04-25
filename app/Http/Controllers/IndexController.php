@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Like;
 use App\Position;
 
 use Illuminate\Http\Request;
@@ -10,14 +11,21 @@ use Illuminate\Support\Facades\DB;
 class IndexController extends Controller
 {
     //
-    public function index(){
+    public function index(Request $request){
+
+        if($request->has('position_id')){
+            $pos_id = $request->input('position_id');
+            $like = Like::where('p_id', $pos_id)->first();
+            $like->likes += 1;
+            $like->save();
+        }
 
         $positions = Position::get()->where('status', 1);
-
         $data = [
             'title' => 'Google maps API web-site',
             'positions' => $positions
         ];
+
 
         return view('index', $data);
     }
