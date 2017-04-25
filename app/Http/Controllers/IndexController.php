@@ -7,7 +7,6 @@ use App\Like;
 use App\Position;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class IndexController extends Controller
 {
@@ -67,10 +66,10 @@ class IndexController extends Controller
 
     public function setPosition(Request $request){
 
-            $position['name'] = $_GET['p_name'];
-            $position['descr'] = $_GET['p_descr'];
-            $position['lat'] = $_GET['p_lat'];
-            $position['lng'] = $_GET['p_lng'];
+            $position['name'] = $request->input('p_name');
+            $position['descr'] = $request->input('p_descr');
+            $position['lat'] = $request->input('p_lat');
+            $position['lng'] = $request->input('p_lng');
 
             $p_id = Position::insertGetId([
                     'position_name' => $position['name'],

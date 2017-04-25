@@ -6,8 +6,7 @@
 
 @section('body')
 
-    <h1>Google map</h1>
-    <span>Для додавання координат клацніть правою кнопкою мишки</span>
+
     @if(isset($positions))
 
         <script>
@@ -69,6 +68,8 @@
 
 
             <div class="intresting-places-block">
+                <h1>Google map</h1>
+                <span>Для додавання координат клацніть правою кнопкою мишки</span><br><hr>
                 @foreach($positions as $pos)
                 <div class="place">
                     <div class="place-header"><b>Name: </b>{{ $pos->position_name }}</div>

@@ -16,6 +16,7 @@
             <td>Lng</td>
             <td>Description</td>
             <td>Status</td>
+            <td>Likes</td>
             <td>Action</td>
         </tr>
     @foreach($positions as $pos)
@@ -26,6 +27,7 @@
             <td style="padding: 5px;">{{ $pos->position_lng }}</td>
             <td style="padding: 5px;">{{ $pos->description }}</td>
             <td style="padding: 5px;">{{ $pos->status }}</td>
+            <td style="padding: 5px;">{{ App\Position::find($pos->id)->like->likes }}</td>
             <td style="padding: 5px;"><a href="{{ route('delete', $pos->id) }}">Delete</a>/ <a href="#">Update</a>@if($pos->status == 0)<a href="{{ route('confirm', $pos->id) }}">/ Confirm</a>@endif</td>
         </tr>
 

@@ -14,7 +14,7 @@ class AdminController extends Controller
     public function index(){
 
         $positions = Position::all();
-        $new = count(Position::get()->where('status', 0));
+        $new = Position::get()->where('status', 0)->count();
 
         $data = [
             'title' => 'Admin',
@@ -41,12 +41,15 @@ class AdminController extends Controller
         $like = Like::where('p_id', $id)->first();
 
         $pos = Position::find($id);
+
         if($like != null)
             $like->delete();
 
         if($ips != null)
             $ips->delete();
-        $pos->delete();
+
+        if($pos != null)
+            $pos->delete();
 
         return redirect()->route('admin');
     }

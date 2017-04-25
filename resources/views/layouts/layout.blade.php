@@ -10,7 +10,7 @@
     <title>{{ $title }}</title>
     <style>
         #map {
-            height: 500px;
+            height: 100%;
             width: 50%;
             float: left;
         }
