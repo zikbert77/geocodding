@@ -17,3 +17,7 @@ Route::get('/setPosition', 'IndexController@setPosition');
 Route::get('/admin', 'AdminController@index')->name('admin');
 Route::get('/confirm/{id}', 'AdminController@confirm')->name('confirm');
 Route::get('/delete/{id}', 'AdminController@delete')->name('delete');
+
+Route::get('auth/login', 'AuthController@getLoginPage')->name('loginPage');
+Route::post('auth/login', 'AuthController@authenticate')->name('authenticate');
+Route::get('auth/logout', 'AuthController@getLogout')->name('logout');

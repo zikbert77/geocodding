@@ -12,7 +12,6 @@
 
         <script>
 
-            var json_pos;
             var map;
             function initMap() {
                 var lutsk = {lat: 50.742473, lng: 25.320875};
@@ -23,6 +22,7 @@
 
 
                 $.get('/getPosition', function (data) {
+                    alert(data);
                     data = JSON.parse(data);
 
                     for(var i=0; i < data.length; i++){
