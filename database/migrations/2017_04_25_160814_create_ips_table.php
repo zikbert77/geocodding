@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLikesipsTable extends Migration
+class CreateIpsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateLikesipsTable extends Migration
      */
     public function up()
     {
-        Schema::create('likesips', function (Blueprint $table) {
+        Schema::create('ips', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('position_id')->unsigned();
             $table->string('ip', 50);
             $table->timestamps();
+            $table->foreign('position_id')->references('id')->on('positions');
         });
     }
 
@@ -27,6 +29,6 @@ class CreateLikesipsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('likesips');
+        Schema::dropIfExists('ips');
     }
 }

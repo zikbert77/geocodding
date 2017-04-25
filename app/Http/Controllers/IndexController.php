@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Ip;
 use App\Like;
 use App\Position;
 
@@ -13,11 +14,27 @@ class IndexController extends Controller
     //
     public function index(Request $request){
 
+        $ip = self::get_ip();
+
         if($request->has('position_id')){
+
             $pos_id = $request->input('position_id');
-            $like = Like::where('p_id', $pos_id)->first();
-            $like->likes += 1;
-            $like->save();
+            $check_ip = Ip::where('position_id', $pos_id)->where('ip', $ip)->first();
+
+            if (!$check_ip){
+                $like = Like::where('p_id', $pos_id)->first();
+                $like->likes += 1;
+                $like->save();
+                $ips = new Ip;
+                $ips->ip = $ip;
+                $ips->position_id = $pos_id;
+                $ips->save();
+
+            } else {
+                echo "Не можна ставити більше 1 лайка";
+            }
+
+
         }
 
         $positions = Position::get()->where('status', 1);
@@ -63,5 +80,22 @@ class IndexController extends Controller
             ]);
 
         return json_encode($position);
+    }
+
+    protected function get_ip()
+    {
+        if (!empty($_SERVER['HTTP_CLIENT_IP']))
+        {
+            $ip=$_SERVER['HTTP_CLIENT_IP'];
+        }
+        elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))
+        {
+            $ip=$_SERVER['HTTP_X_FORWARDED_FOR'];
+        }
+        else
+        {
+            $ip=$_SERVER['REMOTE_ADDR'];
+        }
+        return $ip;
     }
 }
