@@ -37,6 +37,10 @@ class IndexController extends Controller
 
         }
 
+        if($request->has('geo-search')){
+            dump($request);
+        }
+
         $positions = Position::where('status', 1)->get();
         echo ' ';
         $data = [

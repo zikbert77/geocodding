@@ -59,6 +59,30 @@
                 });
 
 
+                var geocoder = new google.maps.Geocoder();
+
+                $("#geo-search").click(function () {
+
+                    geocodeAddress(geocoder, map);
+                });
+
+            }
+
+            function geocodeAddress(geocoder, resultMap){
+                var address = $("#geo-adress").val();
+
+                geocoder.geocode({'address': address}, function (results, status) {
+                    if(status === 'OK'){
+                        resultMap.setCenter(results[0].geometry.location);
+
+                        var marker = new google.maps.Marker({
+                            position: results[0].geometry.location,
+                            map: resultMap
+                        });
+                    } else {
+                        alert('Geocode was not successful for the following reason: ' + status);
+                    }
+                });
             }
 
         </script>
@@ -67,9 +91,23 @@
         </script>
 
 
+
+
+
             <div class="intresting-places-block">
                 <h1>Google map</h1>
                 <span>Для додавання координат клацніть правою кнопкою мишки</span><br><hr>
+
+                <div class="geocodding-block">
+                    <form onsubmit="return false;" id="geo-form">
+                        {{ csrf_field() }}
+                        <label for="geo-adress">Enter adress: </label>
+                        <input type="text" id="geo-adress" name="geo-adress">
+                        <input type="submit" id="geo-search" name="geo-search" value="Search">
+                    </form>
+                    <hr>
+                </div>
+
                 @foreach($positions as $pos)
                 <div class="place">
                     <div class="place-header"><b>Name: </b>{{ $pos->position_name }}</div>
