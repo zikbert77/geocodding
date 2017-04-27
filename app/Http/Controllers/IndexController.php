@@ -34,10 +34,11 @@ class IndexController extends Controller
             }
 
 
+
         }
 
         $positions = Position::where('status', 1)->get();
-        dump($positions);
+        echo ' ';
         $data = [
             'title' => 'Google maps API web-site',
             'positions' => $positions

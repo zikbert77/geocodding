@@ -81,7 +81,6 @@
                             <input type="hidden" name="position_id" value="{{ $pos->id }}">
                             <input type="submit" value="Like"> | {{ App\Position::find($pos->id)->like->likes }}
                         </form>
-
                     </div>
                     <hr>
                 </div>

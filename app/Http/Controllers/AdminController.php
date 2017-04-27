@@ -25,6 +25,40 @@ class AdminController extends Controller
         return view('admin', $data);
     }
 
+    public function update(Request $request, $id)
+    {
+
+        $place = Position::find($id);
+
+        if($request->input('update') != null){
+
+            $new_place = [];
+            $new_place['place_name'] = $request->input('place_name');
+            $new_place['place_lat'] = $request->input('place_lat');
+            $new_place['place_lng'] = $request->input('place_lng');
+            $new_place['description'] = $request->input('place_descr');
+
+            $place->place_name = $new_place['place_name'];
+            $place->place_lat = $new_place['place_lat'];
+            $place->place_lng = $new_place['place_lng'];
+            $place->description = $new_place['description'];
+
+            $place->save();
+
+            return redirect()->route('admin');
+        }
+
+
+
+        $data = [
+            'title' => 'Update',
+            'place_id' => $id,
+            'place' => $place
+        ];
+
+        return view('update', $data);
+    }
+
     public function confirm($id){
 
         $pos = Position::find($id);

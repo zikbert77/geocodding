@@ -10,8 +10,8 @@
     <title>{{ $title }}</title>
     <style>
         #map {
-            height: 100%;
-            width: 50%;
+            height: 900px;
+            width: 59%;
             float: left;
         }
         .intresting-places-block {
