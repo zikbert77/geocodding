@@ -38,9 +38,9 @@ class AdminController extends Controller
             $new_place['place_lng'] = $request->input('place_lng');
             $new_place['description'] = $request->input('place_descr');
 
-            $place->place_name = $new_place['place_name'];
-            $place->place_lat = $new_place['place_lat'];
-            $place->place_lng = $new_place['place_lng'];
+            $place->position_name = $new_place['place_name'];
+            $place->position_lat = $new_place['place_lat'];
+            $place->position_lng = $new_place['place_lng'];
             $place->description = $new_place['description'];
 
             $place->save();
