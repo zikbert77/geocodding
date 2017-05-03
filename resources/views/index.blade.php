@@ -1,10 +1,6 @@
-@extends('layouts.layout')
+@extends('layouts.app')
 
-@section('header')
-    @parent
-@endsection
-
-@section('body')
+@section('content')
 
 
     @if(isset($positions))
@@ -61,12 +57,13 @@
 
                 var geocoder = new google.maps.Geocoder();
 
-                $("#geo-search").click(function () {
 
+                $("#geo-search").click(function () {
                     geocodeAddress(geocoder, map);
                 });
 
             }
+
 
             function geocodeAddress(geocoder, resultMap){
                 var address = $("#geo-adress").val();
@@ -74,11 +71,7 @@
                 geocoder.geocode({'address': address}, function (results, status) {
                     if(status === 'OK'){
                         resultMap.setCenter(results[0].geometry.location);
-
-                        var marker = new google.maps.Marker({
-                            position: results[0].geometry.location,
-                            map: resultMap
-                        });
+                        resultMap.setZoom(14);
                     } else {
                         alert('Geocode was not successful for the following reason: ' + status);
                     }

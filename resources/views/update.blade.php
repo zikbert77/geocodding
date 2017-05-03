@@ -1,20 +1,32 @@
-@extends('layouts.layout')
+@extends('layouts.app')
 
-@section('header')
-    @parent
-@endsection
+@section('content')
 
-@section('body')
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <form action="{{ route('update', $place_id) }}" method="post">
+                {{ csrf_field() }}
+                <div class="form-group">
+                    <label for="place_name">Name: </label>
+                    <input type="text" class="form-control" name="place_name" value="{{ $place->position_name }}">
+                </div>
+                <div class="form-group">
+                    <label for="place_lat">Lat: </label>
+                    <input type="text" class="form-control" name="place_lat"  value="{{ $place->position_lat }}">
+                </div>
+                <div class="form-group">
+                    <label for="place_lng">Lng: </label>
+                    <input type="text" class="form-control" name="place_lng"  value="{{ $place->position_lng }}">
+                </div>
+                <div class="form-group">
+                    <label for="place_descr">Description: </label>
+                    <input type="text" class="form-control" name="place_descr" value="Description">
+                </div>
+                <input type="submit" class="btn btn-primary" name="update" value="Change">
 
-    <form action="{{ route('update', $place_id) }}" method="post">
-        {{ csrf_field() }}
-        <input type="text" name="place_name" value="{{ $place->position_name }}">
-        <input type="text" name="place_lat"  value="{{ $place->position_lat }}">
-        <input type="text" name="place_lng"  value="{{ $place->position_lng }}">
-        <input type="text" name="place_descr" value="descr">
-        <input type="submit" name="update" value="Update">
-
-    </form>
+            </form>
+        </div>
+    </div>
 
 @endsection
 

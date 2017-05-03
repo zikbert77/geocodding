@@ -1,0 +1,17 @@
+.content {
+    padding: 10px;
+}
+
+table tr td {
+    padding: 5px;
+}
+
+#map {
+    height: 900px;
+    width: 59%;
+    float: left;
+}
+.intresting-places-block {
+    float: right;
+    width: 40%;
+}
